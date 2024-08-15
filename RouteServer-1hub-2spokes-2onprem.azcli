@@ -169,13 +169,12 @@ rrun_time=$(($rfinish_time - $rstart_time))
 ((rseconds=rrun_time%60))
 echo -e "\e[1;33mCreating Azure Route Server took $rminutes minutes and $rseconds seconds\e[0m"
 echo -e "\e[1;36mEnabling Branch-to-Branch setting on $hub_rs_name Azure Route Server...\e[0m"
-bstart_time=$(date +%s)
+# Enable B2B on Route Server
 az network routeserver update -n $hub_rs_name -g $rg --allow-b2b-traffic true -o none
-bfinish_time=$(date +%s)
-brun_time=$(($bfinish_time - $bstart_time))
-((bminutes=brun_time/60))
-((bseconds=brun_time%60))
-echo -e "\e[1;33mEnabling B2B on Azure Route Server took $bminutes minutes and $bseconds seconds\e[0m"
+# Set Routing Preference to VpnGateway
+echo -e "\e[1;36mSet Routing Preference to VpnGateway on $hub_rs_name Azure Route Server...\e[0m"
+az network routeserver update -n $hub_rs_name -g $rg --hub-routing-preference VpnGateway -o none
+
 
 # route server details
 echo -e "\e[1;36mGetting $hub_rs_name Route Sever details...\e[0m"
