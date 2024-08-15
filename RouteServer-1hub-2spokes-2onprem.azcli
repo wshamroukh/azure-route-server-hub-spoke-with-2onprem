@@ -137,8 +137,8 @@ az vm create -n $hub_nva_name -g $rg --image $vm_image --nics "$hub_nva_name-ext
 # hub nva details
 echo -e "\e[1;36mGetting $hub_nva_name details...\e[0m"
 hub_nva_pubip=$(az network public-ip show -g $rg -n "$hub_nva_name-pubip" --query ipAddress -o tsv) && echo $hub_nva_name: $hub_nva_pubip
-hub_nva_private_ext_ip=$(az network nic show -g $rg -n $hub_nva_name-ext-nic --query ipConfigurations[].privateIpAddress -o tsv) && echo $hub_nva_name external NIC IP: $hub_nva_private_ext_ip
-hub_nva_private_int_ip=$(az network nic show -g $rg -n $hub_nva_name-int-nic --query ipConfigurations[].privateIpAddress -o tsv) && echo $hub_nva_name internal NIC IP: $hub_nva_private_int_ip
+hub_nva_private_ext_ip=$(az network nic show -g $rg -n $hub_nva_name-ext-nic --query ipConfigurations[].privateIPAddress -o tsv) && echo $hub_nva_name external NIC IP: $hub_nva_private_ext_ip
+hub_nva_private_int_ip=$(az network nic show -g $rg -n $hub_nva_name-int-nic --query ipConfigurations[].privateIPAddress -o tsv) && echo $hub_nva_name internal NIC IP: $hub_nva_private_int_ip
 nva_ext_gw_ip=$(first_ip $hub_nva_subnet_address) && echo $hub_nva_name external NIC default gateway IP: $nva_ext_gw_ip
 nva_int_gw_ip=$(first_ip $hub_vms_subnet_address) && echo $hub_nva_name internal NIC default gateway IP: $nva_int_gw_ip
 
@@ -297,12 +297,12 @@ az vm create -n $onprem2_vm_name -g $rg --image $vm_image --nics "$onprem2_vm_na
 
 # onprem1 gw details:
 onprem1_gw_pubip=$(az network public-ip show -g $rg -n $onprem1_gw_vm_name-pubip --query ipAddress -o tsv) && echo $onprem1_gw_vm_name: $onprem1_gw_pubip
-onprem1_gw_ext_private_ip=$(az network nic show -g $rg -n $onprem1_gw_vm_name-ext-nic --query ipConfigurations[].privateIpAddress -o tsv) && echo $onprem1_gw_vm_name external NIC IP: $onprem1_gw_ext_private_ip
+onprem1_gw_ext_private_ip=$(az network nic show -g $rg -n $onprem1_gw_vm_name-ext-nic --query ipConfigurations[].privateIPAddress -o tsv) && echo $onprem1_gw_vm_name external NIC IP: $onprem1_gw_ext_private_ip
 onprem1_gw_ext_gw_ip=$(first_ip $onprem1_gw_subnet_address) && echo $onprem1_gw_vm_name external NIC default gateway IP: $onprem1_gw_ext_gw_ip
 
 # onprem2 gw details:
 onprem2_gw_pubip=$(az network public-ip show -g $rg -n $onprem2_gw_vm_name-pubip --query ipAddress -o tsv) && echo $onprem2_gw_vm_name: $onprem2_gw_pubip
-onprem2_gw_ext_private_ip=$(az network nic show -g $rg -n $onprem2_gw_vm_name-ext-nic --query ipConfigurations[].privateIpAddress -o tsv) && echo $onprem2_gw_vm_name external NIC IP: $onprem2_gw_ext_private_ip
+onprem2_gw_ext_private_ip=$(az network nic show -g $rg -n $onprem2_gw_vm_name-ext-nic --query ipConfigurations[].privateIPAddress -o tsv) && echo $onprem2_gw_vm_name external NIC IP: $onprem2_gw_ext_private_ip
 onprem2_gw_ext_gw_ip=$(first_ip $onprem2_gw_subnet_address) && echo $onprem2_gw_vm_name external NIC default gateway IP: $onprem2_gw_ext_gw_ip
 
 # local gateway1
